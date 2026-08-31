@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-test("renders the Ballon d'Or voting page", async () => {
+test("renders the offline notice", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
@@ -27,12 +27,11 @@ test("renders the Ballon d'Or voting page", async () => {
     /^text\/html\b/i,
   );
   const html = await response.text();
-  assert.match(html, /<title>Ballon d(?:&#x27;|')Or Vote<\/title>/i);
-  assert.match(html, /Who will win the Ballon d(?:&#x27;|')Or\?/i);
-  assert.match(html, /The boys(?:&#x27;|') live ballot/i);
   assert.match(
     html,
-    /يا سادة يا كرام… الكرة الذهبية حائرة بين النجمين… فمن يحسم المعركة؟/,
+    /<title>Vote Closed \| Ballon d(?:&#x27;|')Or Vote<\/title>/i,
   );
-  assert.doesNotMatch(html, /51% مقابل 49%/);
+  assert.match(html, /Vote closed/i);
+  assert.match(html, /This project is currently offline/i);
+  assert.doesNotMatch(html, /Who will win the Ballon d(?:&#x27;|')Or\?/i);
 });

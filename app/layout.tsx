@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Ballon d'Or Vote",
-  description: "A private live vote to decide the boys' Ballon d'Or winner.",
+  title: "Vote Closed | Ballon d'Or Vote",
+  description: "The Ballon d'Or vote is currently offline.",
 };
 
 export default function RootLayout({
