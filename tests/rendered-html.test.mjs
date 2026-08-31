@@ -30,4 +30,9 @@ test("renders the Ballon d'Or voting page", async () => {
   assert.match(html, /<title>Ballon d(?:&#x27;|')Or Vote<\/title>/i);
   assert.match(html, /Who will win the Ballon d(?:&#x27;|')Or\?/i);
   assert.match(html, /The boys(?:&#x27;|') live ballot/i);
+  assert.match(
+    html,
+    /يا سادة يا كرام… الكرة الذهبية حائرة بين النجمين… فمن يحسم المعركة؟/,
+  );
+  assert.doesNotMatch(html, /51% مقابل 49%/);
 });
