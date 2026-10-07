@@ -17,9 +17,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
-      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -30,11 +27,17 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Prepare Worker, local database, and TypeScript
+        run: bash scripts/cloud-setup.sh
 
-      - name: Build static website
-        run: npm run build
+      - name: Test built Worker and components
+        run: bash scripts/sites-env.sh -- node --test tests/*.test.mjs
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build GitHub Pages website
+        run: bash scripts/sites-env.sh -- node scripts/build-pages.mjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -44,7 +47,7 @@ jobs:
       - name: Upload website
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist/client
+          path: out/pages
 
   deploy:
     environment:

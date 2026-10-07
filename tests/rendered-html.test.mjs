@@ -1,25 +1,12 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import test, { after } from "node:test";
+import { createTestWorker } from "./worker-fixture.mjs";
 
-test("renders the offline notice", async () => {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
+const worker = await createTestWorker();
+after(async () => { await worker.dispose(); });
 
-  const response = await worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
-  );
+test("renders Zainab’s pharmacy, letter, and pressure-free choices", async () => {
+  const response = await worker.dispatchFetch("http://localhost/", { headers: { accept: "text/html" } });
 
   assert.equal(response.status, 200);
   assert.match(
@@ -27,11 +14,21 @@ test("renders the offline notice", async () => {
     /^text\/html\b/i,
   );
   const html = await response.text();
-  assert.match(
-    html,
-    /<title>Vote Closed \| Ballon d(?:&#x27;|')Or Vote<\/title>/i,
-  );
-  assert.match(html, /Vote closed/i);
-  assert.match(html, /This project is currently offline/i);
-  assert.doesNotMatch(html, /Who will win the Ballon d(?:&#x27;|')Or\?/i);
+  assert.match(html, /<title>For Zainab · The Little Love Pharmacy<\/title>/);
+  assert.match(html, /A prescription/);
+  assert.match(html, /Dear Zainab/);
+  assert.match(html, /because you feel obliged/);
+  assert.match(html, /I need a little time/);
+  assert.match(html, /My answer is no/);
+  assert.match(html, /are saved so I can read them/);
+  assert.doesNotMatch(html, /Vote closed/);
+});
+
+test("renders the private dashboard without revealing answers or an access key", async () => {
+  const response = await worker.dispatchFetch("http://localhost/responses");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Private access key/);
+  assert.doesNotMatch(html, /test-only-access-key/);
+  assert.doesNotMatch(html, /response-row/);
 });

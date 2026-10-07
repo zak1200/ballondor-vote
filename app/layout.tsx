@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Vote Closed | Ballon d'Or Vote",
-  description: "The Ballon d'Or vote is currently offline.",
+  title: "For Zainab · The Little Love Pharmacy",
+  description: "A little prescription of tenderness, and a promise to move at your pace.",
+  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({
