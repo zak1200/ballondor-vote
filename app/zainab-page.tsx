@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type MouseEvent } from "react";
+import Image from "next/image";
 import { ArrowDown, ArrowRight, Check, Flower2, Heart, HeartHandshake, Mail, Plus, Sparkles } from "lucide-react";
 
 type Choice = "yes" | "time" | "no";
@@ -89,7 +90,7 @@ export default function ZainabPage() {
   return (
     <div className="love-site">
       <header className="site-header">
-        <a className="brand" href="#home" aria-label="The Little Love Pharmacy, home"><span className="brand-mark"><Plus strokeWidth={3} /></span><span>the little<br /><b>love pharmacy.</b></span></a>
+        <a className="brand" href="#home" aria-label="Zainab’s Pharmacy, home"><span className="brand-mark"><Plus strokeWidth={3} /></span><span>Zainab’s<br /><b>pharmacy.</b></span></a>
         <span className="header-note">A little something, just for you <Heart size={13} /></span>
         <a className="header-link" href="#letter">Your little letter <ArrowRight size={15} /></a>
       </header>
@@ -106,7 +107,7 @@ export default function ZainabPage() {
           <div className="prescription-wrap">
             <span className="handwritten top-note">For you, Zainab <span>↘</span></span>
             <article className="prescription">
-              <div className="rx-top"><span className="rx-symbol">℞</span><span>THE LITTLE LOVE PHARMACY<br /><small>A very personal preparation</small></span><Plus size={20} /></div>
+              <div className="rx-top"><span className="rx-symbol">℞</span><span>ZAINAB’S PHARMACY<br /><small>A very personal preparation</small></span><Plus size={20} /></div>
               <div className="rx-rule" />
               <div className="patient-line"><span>Made especially for</span><strong>Zainab</strong><Heart size={15} /></div>
               <div className="bouquet-wrap"><Bouquet /><span className="bouquet-label">a little memory of Sunday</span></div>
@@ -125,7 +126,7 @@ export default function ZainabPage() {
           <div className="section-heading"><span className="eyebrow">LITTLE MOMENTS. BIG FEELINGS.</span><h2 id="memories-heading">That Sunday, <em>with you.</em></h2><p>Some ordinary days stay with us a little longer.</p></div>
           <div className="memory-grid">
             <article className="memory-card"><span className="memory-number">01 /</span><span className="memory-icon pink"><Flower2 /></span><h3>Flowers, just because</h3><p>Because you deserve beautiful things. Not just on special occasions.</p><span className="memory-caption">a little dose of happiness</span></article>
-            <article className="memory-card"><span className="memory-number">02 /</span><span className="memory-icon gold"><Heart /></span><h3>A necklace. A thought.</h3><p>A small gift to remind you of something big: how much you mean to me.</p><span className="memory-caption">something close to your heart</span></article>
+            <article className="memory-card memory-photo-card"><span className="memory-number">02 /</span><Image className="memory-photo" src={isGitHubPages ? "/ballondor-vote/assets/zainab.jpg" : "/assets/zainab.jpg"} alt="Zainab, a little memory of our Sunday together" width={2880} height={3840} unoptimized /><div className="memory-photo-copy"><h3>My favourite part? You.</h3><p>That smile. That little moment. A memory I keep coming back to.</p><span className="memory-caption">you make ordinary days feel special</span></div></article>
             <article className="memory-card"><span className="memory-number">03 /</span><span className="memory-icon sage"><Mail /></span><h3>Words that stayed</h3><p>Our conversation. Your honesty. And that little letter I left with you.</p><span className="memory-caption">perhaps, the start of a new page</span></article>
           </div>
         </section>
@@ -135,7 +136,7 @@ export default function ZainabPage() {
           <div className={`letter-paper ${opened ? "is-open" : ""}`}>
             <span className="letter-topline"><Mail size={16} /> A LETTER FOR ZAINAB <span>♡</span></span>
             <h3>Dear Zainab,</h3>
-            <p>On Sunday, the flowers and the necklace were little ways of saying something much bigger: you mean so much to me.</p>
+            <p>On Sunday, the flowers were a little way of saying something much bigger: you mean so much to me. But my favourite part of the day was simply being with you.</p>
             <p>When you told me you were scared of going through our story again, I heard you. Six years ago, I was 19. I didn’t have the maturity to love the way I want to today.</p>
             {opened && <div className="letter-more"><p>I know you’re finding yourself, and I don’t want to stand in the way of that. I’d like to be someone beside whom you can still be completely you. With your dreams, your doubts, and your freedom.</p><p>I can’t promise a perfect life. I can promise to listen, to make an effort, to own my mistakes, and to show you through everyday actions that I mean what I say.</p><p>You are the love of my life. And to me, loving you also means respecting your pace. I’m ready to do my part to build something beautiful, if that’s what you want too.</p><p>I don’t want you to say yes because you feel obliged. I want it to be because you can see this making you happy. I’m sure we could build something beautiful, and I want to show you that through my actions.</p><p>So, no big leap today. Maybe just one little step, together?</p><div className="letter-signature">The one who’s thinking of you.<span>♡</span></div></div>}
             <button className="letter-toggle" type="button" onClick={() => setOpened(!opened)} aria-expanded={opened}>{opened ? "Fold my letter back up" : "Read the rest of my letter"}<ArrowRight size={15} /></button>
@@ -155,7 +156,6 @@ export default function ZainabPage() {
                 <button type="button" className="playful-no" disabled={saving} onClick={escape} style={position ? { left: position.left, top: position.top, right: "auto" } : undefined}>No <span>🙈</span></button>
                 <span className="escape-caption" aria-live="polite">{escapes ? ["Oops. That button is a little shy…", "It thinks you deserve a little time ♡", "Someone took a dose of mischief."][Math.min(escapes - 1, 2)] : ""}</span>
               </div>
-              <div className="honest-options"><button disabled={saving} className="text-button" onClick={() => void choose("time")}>I need a little time</button><span>·</span><button disabled={saving} className="text-button" onClick={() => void choose("no")}>My answer is no</button></div>
               <p className="no-pressure">A little mischief, zero pressure. Every real answer will be respected.</p>
               {error && <p className="save-error" role="alert">{error}</p>}
             </>}
@@ -163,7 +163,7 @@ export default function ZainabPage() {
           </div>
         </section>
       </main>
-      <footer className="site-footer content-width"><span className="footer-brand"><Plus size={16} /> the little love pharmacy.</span><span>One prescription. One very special Zainab. <Heart size={12} /></span><span>Made with love.</span></footer>
+      <footer className="site-footer content-width"><span className="footer-brand"><Plus size={16} /> Zainab’s pharmacy.</span><span>One prescription. One very special Zainab. <Heart size={12} /></span><span>Made with love.</span></footer>
     </div>
   );
 }

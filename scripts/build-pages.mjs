@@ -15,6 +15,7 @@ for (const file of ["page.tsx", "layout.tsx", "zainab-page.tsx", "globals.css"])
   await cp(path.join(root, "app", file), path.join(staging, "app", file));
 }
 await cp(path.join(root, "vendor"), path.join(staging, "vendor"), { recursive: true });
+await cp(path.join(root, "public"), path.join(staging, "public"), { recursive: true });
 await cp(path.join(root, "postcss.config.mjs"), path.join(staging, "postcss.config.mjs"));
 await writeFile(path.join(staging, "package.json"), JSON.stringify({ name: "ballondor-vote", private: true, type: "module" }));
 await writeFile(path.join(staging, "next.config.ts"), `export default { output: "export", images: { unoptimized: true } };\n`);

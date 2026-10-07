@@ -1,8 +1,8 @@
 # Ballon d'Or Vote
 
-The repository and environment keep their original name. The current website is an English, pharmacy-themed letter for Zainab: **The Little Love Pharmacy**.
+The repository and environment keep their original name. The current website is an English, pharmacy-themed letter for Zainab: **Zainab’s Pharmacy**.
 
-It includes Sunday’s flowers, necklace, and conversation; an expandable personal letter; a playful moving “No”; and permanent “I need a little time” and “My answer is no” options. Keyboard activation and reduced-motion preferences make the playful button behave like a normal No. The page explains that choices are saved before the visitor answers.
+It includes Sunday’s flowers, Zainab’s photo, and conversation; an expandable personal letter; a Yes button; and a playful moving “No”. Keyboard activation and reduced-motion preferences make the playful button behave like a normal No. The Worker version explains that choices are saved before the visitor answers; the GitHub Pages version explains that answers are not sent.
 
 ## Cloud development
 

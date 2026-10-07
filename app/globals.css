@@ -230,8 +230,12 @@ a {
 .section-heading { text-align: center; }
 .love-site h2 { font-family: Georgia, serif; font-weight: 400; font-size: 39px; line-height: 1.25; letter-spacing: -1.3px; margin: 14px 0; }
 .section-heading > p { color: #818575; font-size: 13px; }
-.memory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 40px; }
+.memory-grid { display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; gap: 22px; margin-top: 40px; }
 .memory-card { position: relative; border: 1px solid #e3e2d6; background: #fdfbf5; border-radius: 8px; padding: 28px 26px; }
+.memory-card.memory-photo-card { padding: 12px; }
+.memory-photo-card .memory-number { z-index: 1; top: 22px; right: 22px; padding: 3px 7px; border-radius: 4px; color: #5f7057; background: #fffdf7e8; }
+.memory-photo { display: block; width: 100%; height: 230px; object-fit: cover; object-position: center 52%; border-radius: 5px; }
+.memory-photo-copy { padding: 18px 12px 10px; }
 .memory-number { position: absolute; right: 24px; top: 24px; font-size: 10px; color: #a7aa99; font-family: monospace; }
 .memory-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; margin-bottom: 24px; }
 .memory-icon svg { width: 20px; stroke-width: 1.4; }
@@ -265,7 +269,6 @@ a {
 .playful-no { position: absolute; top: 0; right: 12px; border: 1px solid #cbd3be; background: #f9faf4; padding: 13px 26px; border-radius: 6px; color: #7c8b6d; font-size: 12px !important; transition: left .22s ease, top .22s ease; white-space: nowrap; }
 .playful-no span { margin-left: 5px; font-size: 13px; }
 .escape-caption { position: absolute; bottom: 0; left: 0; width: 100%; text-align: center; color: #9b8874; font-family: Georgia, serif; font-style: italic; font-size: 12px; }
-.honest-options { display: flex; gap: 14px; justify-content: center; align-items: center; margin-block: 16px; color: #9aa38b; }
 .text-button { border: 0; background: transparent; padding: 5px 0; color: #687b5c; font-size: 11px !important; text-decoration: underline; text-underline-offset: 4px; display: inline-flex; align-items: center; gap: 6px; }
 .text-button:hover { color: #334f40; }
 .question-card .no-pressure { font-size: 10px; margin-block: 0 23px; }
@@ -346,7 +349,6 @@ a {
   .answer-arena { height: 175px; }
   .answer-arena .yes-button { font-size: 10px; padding: 13px 12px; gap: 5px; }
   .playful-no { padding: 12px 15px; right: 0; }
-  .honest-options { gap: 10px; }.honest-options .text-button { font-size: 10px !important; }
   .site-footer { flex-direction: column; gap: 10px; padding-block: 24px; }
   .dashboard-card { padding: 28px 20px; }.dashboard h1 { font-size: 32px; }
   .response-row { flex-wrap: wrap; gap: 10px; }.response-row time { width: 100%; padding-left: 25px; }
