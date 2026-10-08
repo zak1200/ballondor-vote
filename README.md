@@ -2,7 +2,7 @@
 
 The repository and environment keep their original name. The current website is an English, pharmacy-themed letter for Zainab: **Zainab’s Pharmacy**.
 
-The public website was taken offline at the owner's request. The GitHub Actions workflow publishes only a minimal offline page, then unpublishes GitHub Pages. It does not upload the letter or photograph, and it does not automatically enable Pages. Restoring the public website requires deliberately restoring the deployment workflow and enabling Pages again.
+The public website was taken offline at the owner's request. GitHub Pages now serves only a minimal offline notice. The shutdown workflow does not upload the letter or photograph and does not automatically enable Pages. The available credentials could not fully unpublish Pages; the repository owner can do that under **Settings → Pages → Unpublish site**. Restoring the personal website requires deliberately restoring its deployment workflow.
 
 It includes Sunday’s flowers, Zainab’s photo, and conversation; an expandable personal letter; a Yes button; and a playful moving “No”. Keyboard activation and reduced-motion preferences make the playful button behave like a normal No. The Worker version explains that choices are saved before the visitor answers; the GitHub Pages version explains that answers are not sent.
 

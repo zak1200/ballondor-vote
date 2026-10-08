@@ -46,33 +46,3 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Unpublish GitHub Pages
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          python3 - <<'PY'
-          import os
-          import urllib.error
-          import urllib.request
-
-          url = 'https://api.github.com/repos/' + os.environ['GITHUB_REPOSITORY'] + '/pages'
-          headers = {'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
-                     'Accept': 'application/vnd.github+json',
-                     'X-GitHub-Api-Version': '2022-11-28'}
-
-          def status(method):
-              request = urllib.request.Request(url, headers=headers, method=method)
-              try:
-                  with urllib.request.urlopen(request, timeout=30) as response:
-                      return response.status
-              except urllib.error.HTTPError as error:
-                  return error.code
-
-          deleted = status('DELETE')
-          if deleted not in (204, 404):
-              raise SystemExit(f'Offline page deployed, but unpublishing failed (HTTP {deleted}).')
-          checked = status('GET')
-          if checked != 404:
-              raise SystemExit(f'Could not confirm unpublishing (HTTP {checked}).')
-          print('GitHub Pages is unpublished; the public website is disabled.')
-          PY
