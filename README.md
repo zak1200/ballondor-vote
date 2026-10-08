@@ -2,8 +2,6 @@
 
 The repository and environment keep their original name. The current website is an English, pharmacy-themed letter for Zainab: **Zainab’s Pharmacy**.
 
-The public website was taken offline at the owner's request. GitHub Pages now serves only a minimal offline notice. The shutdown workflow does not upload the letter or photograph and does not automatically enable Pages. The available credentials could not fully unpublish Pages; the repository owner can do that under **Settings → Pages → Unpublish site**. Restoring the personal website requires deliberately restoring its deployment workflow.
-
 It includes Sunday’s flowers, Zainab’s photo, and conversation; an expandable personal letter; a Yes button; and a playful moving “No”. Keyboard activation and reduced-motion preferences make the playful button behave like a normal No. The Worker version explains that choices are saved before the visitor answers; the GitHub Pages version explains that answers are not sent.
 
 ## Cloud development
@@ -39,7 +37,7 @@ The website needs a Cloudflare-compatible Worker runtime, a D1 binding named `DB
 
 GitHub Pages hosts a separate static version of the public letter and interactive buttons. The Pages version clearly explains that answers are not recorded or sent; Zainab can tell you her answer privately. The private response dashboard remains available in the Worker version.
 
-Build Pages locally with `bash scripts/sites-env.sh -- node scripts/build-pages.mjs`; the output is `out/pages`. The public deployment workflow is disabled for the personal site and handles shutdown instead. The former Pages address is `https://zak1200.github.io/ballondor-vote/`.
+Build Pages with `bash scripts/sites-env.sh -- node scripts/build-pages.mjs`; the output is `out/pages`. The GitHub Actions workflow validates the Worker and publishes the static version on pushes to `main`. The repository's Pages address is `https://zak1200.github.io/ballondor-vote/`; deployment must complete before the new page appears there.
 
 Publishing this Codex development environment is separate from deploying a public website. The cloud setup script prepares the local Worker and database, without creating a remote database.
 

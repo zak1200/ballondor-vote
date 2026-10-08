@@ -1,4 +1,4 @@
-name: Take website offline
+name: Deploy Ballon d'Or Vote
 
 on:
   push:
@@ -18,22 +18,36 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Prepare an offline page without website content or photos
-        run: |
-          mkdir offline-site
-          cat > offline-site/index.html <<'HTML'
-          <!doctype html><html lang="en"><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Website offline</title><body><p>This website is offline.</p></body></html>
-          HTML
-          cp offline-site/index.html offline-site/404.html
-          touch offline-site/.nojekyll
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Prepare Worker, local database, and TypeScript
+        run: bash scripts/cloud-setup.sh
+
+      - name: Test built Worker and components
+        run: bash scripts/sites-env.sh -- node --test tests/*.test.mjs
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build GitHub Pages website
+        run: bash scripts/sites-env.sh -- node scripts/build-pages.mjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Upload website
         uses: actions/upload-pages-artifact@v4
         with:
-          path: offline-site
+          path: out/pages
 
   deploy:
     environment:
